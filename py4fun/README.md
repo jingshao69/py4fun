@@ -2,15 +2,15 @@
 
 ## picalc.py 	
 
-picalc.py is a Python program to calculate Pi using Machin like formulas.
+picalc.py is a Python program to calculate Pi using Machin like formula.
 
-Multiple threads are used to calculate the parts
+See https://en.wikipedia.org/wiki/Machin-like_formula for details.
+
+Multiple threads are used to calculate the parts.
 
 By default, picalc will caculate Pi to 10000 digits. You can change the number of digits by specifying -d option.
 
 Use picalc.py -h for help messages.
-
-number_of_digits options
 
 ## prime.py
 

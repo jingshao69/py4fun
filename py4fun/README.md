@@ -20,6 +20,14 @@ You can change the limit by specifying the -m option.
 
 Use prime.py -h for help mesages.
 
+## tk_loan.py
+
+Loan Calculator using pytk
+
+## tk_saving.py
+
+Saving Calculator using pytk
+
 Enjoy!
 
 

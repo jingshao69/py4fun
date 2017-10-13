@@ -22,3 +22,5 @@ if (args.get):
   scp.get(args.srcfile, args.destfile)
 else:
   scp.put(args.srcfile, args.destfile)
+
+myssh.closeSCPClient(scp)

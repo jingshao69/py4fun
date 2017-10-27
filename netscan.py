@@ -7,10 +7,15 @@ import netaddr
 import os
 import sys
 import argparse
+import re
+import socket, fcntl, struct
+from netifaces import interfaces, ifaddresses, AF_INET
 
 CONFIG_FILE= os.environ['HOME'] + "/.known_hosts"
 MAC_ADDR_STR="MAC Address"
 DEFAULT_NET="192.168.3.0"
+
+my_ip=""
 
 oui_map={}
 mac_map={}
@@ -67,6 +72,22 @@ def get_mac():
 		if (fields[3] != "00:00:00:00:00:00"):
                     mac_map[ip] = fields[3]
     ins.close()
+
+def get_my_ip():
+    for ifaceName in interfaces():
+        addresses = [i['addr'] for i in ifaddresses(ifaceName).setdefault(AF_INET, [{'addr':'No IP addr'}] )]
+        if re.match("^e", ifaceName):
+            return ifaceName, addresses[0]
+
+def get_my_mac(ifname):
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    info = fcntl.ioctl(s.fileno(), 0x8927,  struct.pack('256s', ifname[:15]))
+    return ':'.join(['%02x' % ord(char) for char in info[18:24]])
+
+def init_my_ip():
+    my_intf, my_ip=get_my_ip()
+    my_mac_addr = get_my_mac(my_intf)
+    mac_map[my_ip]=my_mac_addr
 
 def do_ping(subnet):
     global ip_list
@@ -129,6 +150,9 @@ args = parser.parse_args()
 net_parts=args.net.split(".")
 
 subnet=".".join(net_parts[:3])
+
+#Find my own IP/MAC and add to the map
+init_my_ip()
 
 print "[Scanning network %s.0...]" %(subnet)
 

@@ -81,12 +81,13 @@ def get_my_ip():
 
 def get_my_mac(ifname):
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    info = fcntl.ioctl(s.fileno(), 0x8927,  struct.pack('256s', ifname[:15]))
+    info = fcntl.ioctl(s.fileno(), 0x8927,  struct.pack('256s', str(ifname[:15])))
     return ':'.join(['%02x' % ord(char) for char in info[18:24]])
 
 def init_my_ip():
     my_intf, my_ip=get_my_ip()
     my_mac_addr = get_my_mac(my_intf)
+    print "Adding my own %s ==> %s to the Map" %(my_ip, my_mac_addr)
     mac_map[my_ip]=my_mac_addr
 
 def do_ping(subnet):

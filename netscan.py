@@ -14,6 +14,7 @@ from netifaces import interfaces, ifaddresses, AF_INET
 CONFIG_FILE= os.environ['HOME'] + "/.known_hosts"
 MAC_ADDR_STR="MAC Address"
 DEFAULT_NET="192.168.3.0"
+OUI_MAP="oui.map"
 
 my_ip=""
 
@@ -21,6 +22,15 @@ oui_map={}
 mac_map={}
 ip_list=[]
 known_hosts = {}
+
+def get_ouimap_file():
+    if os.path.exists(OUI_MAP):
+        return OUI_MAP
+
+    bin_oui_map = os.environ['HOME'] + '/bin/' + OUI_MAP
+    if os.path.exists(bin_oui_map):
+	return bin_oui_map
+    return ''
 
 def pinger( job_q, results_q ):
     DEVNULL = open(os.devnull,'w')
@@ -37,7 +47,8 @@ def pinger( job_q, results_q ):
 
 def init_oui_map():
     global oui_map
-    with open("oui.map", "r") as ins:
+    oui_mapfile = get_ouimap_file()
+    with open(oui_mapfile, "r") as ins:
         for line in ins:
 	    fields = line.split(":")
 	    mac = fields[0].strip()
@@ -151,6 +162,10 @@ args = parser.parse_args()
 net_parts=args.net.split(".")
 
 subnet=".".join(net_parts[:3])
+
+if not os.path.exists("/proc/net/arp"):
+    print "No /proc/net/arp found! Not a true Linux system!"
+    sys.exit()
 
 #Find my own IP/MAC and add to the map
 init_my_ip()

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 IFS=:
-PY4FUN_PY=imgresize.py:pdfextract.py:pdfmerge.py:picalc.py:prime.py:scpfile.py:sshcmd.py:tk_loan.py:tk_saving.py:tk_tax.py:netscan.py:oui.map
+PY4FUN_PY=imgresize.py:pdfextract.py:pdfmerge.py:picalc.py:prime.py:scpfile.py:sshcmd.py:tk_loan.py:tk_saving.py:tk_tax.py:tk_hash.py:netscan.py:oui.map
 
 pushd $HOME/bin
 

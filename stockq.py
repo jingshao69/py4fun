@@ -24,4 +24,4 @@ url = ENDP + "/stock/" + args.stock + "/quote"
 stock_data = https_get_json(url)
 
 market_cap = stock_data['marketCap']/float(1000000000)
-print "%s %s %.1fB" %(stock_data['latestPrice'], stock_data['change'], market_cap)
+print "%s %s %s %.1fB" %(args.stock.upper(), stock_data['latestPrice'], stock_data['change'], market_cap)

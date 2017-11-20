@@ -11,7 +11,7 @@ from Tkinter import *
 PROG_TITLE="Loan Calculator"
 
 # The name of the config file
-CONFIG_FILE="tk_loan.ini"
+CONFIG_FILE=".tk_loan.ini"
 
 # Help String
 PROG_HELP="Mortgage Calculator in Python"

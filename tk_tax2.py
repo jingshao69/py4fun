@@ -12,7 +12,7 @@ from Tkinter import *
 PROG_TITLE="Tax Calculator 2018"
 
 # The name of the config file
-CONFIG_FILE="tk_tax.ini"
+CONFIG_FILE=".tk_tax2.ini"
 
 CONFIG_NAME='Tax'
 

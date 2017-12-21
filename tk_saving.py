@@ -11,7 +11,7 @@ from Tkinter import *
 PROG_TITLE="Saving Calculator"
 
 # The name of the config file
-CONFIG_FILE="tk_saving.ini"
+CONFIG_FILE=".tk_saving.ini"
 
 # Help String
 PROG_HELP="Saving Calculator in Python"

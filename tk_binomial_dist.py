@@ -13,7 +13,7 @@ PROG_TITLE="Binomial Calculator"
 PROG_HELP="Binomial Calculator in Python"
 
 #Fields
-fields = ('n', 'k', 'Coeff')
+fields = ('Number of Attempts', 'Number of Success', 'Probabilty of Success', 'Probability')
 
 field_values = {}
 UI_Entries={}
@@ -27,14 +27,16 @@ def factorial(n):
 def binomial(n, k):
     return math.factorial(n) / (math.factorial(n-k) * math.factorial(k))
 
-def calc_binomial(*args):
+def calc_probability(*args):
    # period rate:
-   n = int(UI_Entries['n'].get())
-   k = int(UI_Entries['k'].get())
-   if (k <= n):
-       coeff = binomial(n, k)
-       UI_Entries['Coeff'].delete(0,END)
-       UI_Entries['Coeff'].insert(0, str(coeff))
+   n = int(UI_Entries['Number of Attempts'].get())
+   k = int(UI_Entries['Number of Success'].get())
+   p = float(UI_Entries['Probabilty of Success'].get())
+
+   prob = binomial(n, k) * math.pow(p, k)*math.pow(1-p, n-k)
+   prob_str = '%.3f' %(prob)
+   UI_Entries['Probability'].delete(0,END)
+   UI_Entries['Probability'].insert(0, prob_str )
 
 def about(*args):
    tkMessageBox.showinfo("About", PROG_HELP)
@@ -59,7 +61,7 @@ def add_callback():
    for field in fields:
       #print field
       ent = UI_Entries[field]
-      ent.bind("<FocusOut>", calc_binomial)
+      ent.bind("<FocusOut>", calc_probability)
 
 if __name__ == '__main__':
 
@@ -73,7 +75,7 @@ if __name__ == '__main__':
    b3 = Button(root, text='Quit', command=quit_form)
    b3.pack(side=RIGHT, padx=5, pady=5)
 
-   b2 = Button(root, text='Coefficient', command=calc_binomial)
+   b2 = Button(root, text='Probability', command=calc_probability)
    b2.pack(side=RIGHT, padx=5, pady=5)
 
    b1 = Button(root, text='About', command=about)

@@ -20,13 +20,9 @@ def check_range(page):
   return 0
 
 
-sys.exit()
-
 
 #Create the PdfFileWriter object
 pdfWriter = PyPDF2.PdfFileWriter()
-
-print "BB"
 
 parser = argparse.ArgumentParser()
 parser.add_argument('outFile')
@@ -34,9 +30,6 @@ parser.add_argument('inFile')
 parser.add_argument('range')
 
 args = parser.parse_args()
-
-sys.exit()
-print "AA"
 
 page_ranges =args.range.split(',')
 

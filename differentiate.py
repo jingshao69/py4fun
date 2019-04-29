@@ -12,9 +12,13 @@ function_expr = raw_input("Enter your Function: ")
 
 F = parse_expr(function_expr, evaluate=False)
 
-print "%r" %(F)
+#F = x*sin(x)
 
-G = integrate(F, x)
+F1 = diff(F, x)
+F2 = diff(F1, x)
 
-print "%r" %(G)
+print ""
+
+print "F' = %r" %(F1)
+print "F'' = %r" %(F2)
 

@@ -1,0 +1,7 @@
+sqrt(x)
+x
+x**2
+x**3
+sin(Rational(1,2)*pi*x)
+cos(Rational(1,2)*pi*x)
+

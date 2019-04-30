@@ -1,47 +1,59 @@
 #!/usr/bin/python
 
+import sys
 from sympy import *
+from sympy.parsing.sympy_parser import parse_expr
 
 init_printing(use_unicode=False, wrap_line = False)
 
 x = Symbol('x')
 
-F1 = 12*x-2
-F2 =  2*x**2+6*x-2
+def find_zero(F):
+    result=solve(F)
+    #print "%r: %r" %(F, result)
+    return result
 
-a = solve(F1)
+def area(F, r0, r1):
+    a=simplify(integrate(F, (x, r0, r1)))
+    return abs(a)
 
-print "%r: %r" %(F1, a)
+def find_sub_area(F, xranges):
+    last_x_flag = False;
+    min_x=xranges[0]
+    max_x = xranges[1]
 
-result = solve(F2)
+    F_zeros=find_zero(F)
+    
+    print "Function: %r zeros: %r\n" %(F, F_zeros)
+    
+    start_x = last_x = min_x
 
-print "%r: %r" %(F2, result)
+    end_x = max_x
+    for x in F_zeros:
+        if (x > min_x) and ( x <max_x):
+            a = area(F, start_x, x)
+            last_x = x
+            print "[%r - %r]: %r" %(start_x, x, a)
 
-b = result[1]
+    
+    a = area(F, last_x, max_x)
+    print "[%r - %r]: %r\n" %(last_x, max_x, a)
+   
 
-c = solve(F1-F2)
+function1 = raw_input("Enter your first function: ")
 
-print c
+F1 = parse_expr(function1, evaluate=False)
 
-area1 = -simplify(integrate(F2, (x, 0, b)))
-area2 = -integrate(F1,(x,0, a))
+function = raw_input("Enter your second function: ")
 
-total_area1 = area1 - area2
+F2 = parse_expr(function, evaluate=False)
 
-print "***************"
+print ""
+xranges= find_zero(F1-F2)
+print "\nRange: [%r - %r]\n" %(xranges[0], xranges[1])
 
-print "area1: %r" %(area1)
-print "area2: %r" %(area2)
-print "total_area1: %r" %(total_area1)
+find_sub_area(F1, xranges)
 
-area3 = integrate(F1, (x, a, 3))
-area4 = simplify(integrate(F2, (x, b, 3)))
+find_sub_area(F2, xranges)
 
-total_area2 = area3 - area4
-
-print "area3: %r" %(area3)
-print "area4: %r" %(area4)
-print "total_area2: %r" %(total_area2)
-
-print "total_area: %r" %(simplify(total_area1 + total_area2))
-
+         

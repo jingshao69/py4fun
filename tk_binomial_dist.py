@@ -7,10 +7,10 @@ from Tkinter import *
 
 
 # The title of the program
-PROG_TITLE="Binomial Calculator"
+PROG_TITLE="Binomial Distribution Calculator"
 
 # Help String
-PROG_HELP="Binomial Calculator in Python"
+PROG_HELP="Binomial Distribution Calculator in Python"
 
 #Fields
 fields = ('Number of Attempts', 'Number of Success', 'Probabilty of Success', 'Probability')

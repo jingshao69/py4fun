@@ -7,14 +7,17 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('nbytes')
 
+parser.add_argument('-d', '--delimiter', default=':')
 args = parser.parse_args()
 
 size=int(args.nbytes)
 
+hex_array=[]
 rnd=os.urandom(size)
-rnd_hex= binascii.b2a_hex(rnd)
+for i in range(0, len(rnd)):
+  hex_code = binascii.b2a_hex(rnd[i])
+  hex_array.append(hex_code)
 
-for i in range(0, size):
-  print "0x%s," %(rnd_hex[i*2: i*2+2]),
+print args.delimiter.join(hex_array)
 
 

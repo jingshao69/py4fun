@@ -4,4 +4,8 @@ x**2
 x**3
 sin(Rational(1,2)*pi*x)
 cos(Rational(1,2)*pi*x)
+sin(Rational(1,2)*pi*x)**2
+cos(Rational(1,2)*pi*x)**2
+sin(Rational(1,2)*pi*x)**3
+cos(Rational(1,2)*pi*x)**3
 

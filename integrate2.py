@@ -12,7 +12,7 @@ def area_vol(F,a, b):
   G = pi*F*F
   area = integrate(F, (x,a, b))
   volume = integrate(G, (x, a, b))
-  print "Function: %r\tArea: %r\tVolume: %r " %(F, area, volume)
+  print("Function: %r\tArea: %r\tVolume: %r " %(F, area, volume))
 
 
 parser = argparse.ArgumentParser()

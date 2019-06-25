@@ -1,10 +1,10 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import locale
 import os.path
-import ConfigParser
-import tkMessageBox
-from Tkinter import *
+import configparser
+import tkinter.messagebox
+from tkinter import *
 
 
 # The title of the program
@@ -56,7 +56,7 @@ def total_saving(*args):
 
 
 def about(*args):
-   tkMessageBox.showinfo("About", PROG_HELP)
+   tkinter.messagebox.showinfo("About", PROG_HELP)
 
 
 def load_config():
@@ -66,13 +66,13 @@ def load_config():
       field_values[field] = "0"
 
    if os.path.isfile(CONFIG_FILE):
-      config = ConfigParser.RawConfigParser()
+      config = configparser.RawConfigParser()
       config.read(CONFIG_FILE)
       for field in fields:
          field_values[field] = config.get('Loan', field)
 
 def save_config():
-   config = ConfigParser.RawConfigParser()
+   config = configparser.RawConfigParser()
 
    config.add_section('Loan')
    for field in fields:

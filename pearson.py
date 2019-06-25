@@ -32,6 +32,6 @@ def pearson_coeff(x, y):
 coeff, pvalue=scipy.stats.pearsonr(array1, array2)
 coeff2 = pearson_coeff(array1, array2)
 
-print coeff
-print coeff2
+print(coeff)
+print(coeff2)
 

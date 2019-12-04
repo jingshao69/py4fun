@@ -1,0 +1,20 @@
+Shōkaku:Battle of the Philippine Sea
+Zuikaku:Battle of Leyte Gulf
+Akagi:Battle of Midway
+Amagi:Airstike
+Hiryū:Battle of Midway
+Hiyō:Battle of the Philippine Sea
+Hōshō:Scrapped
+Jun'yō:Scrapped
+Kaga:Battle of Midway
+Katsuragi:Scrapped
+Ryūhō:Scrapped
+Ryūjō:Battle of the Eastern Solomons
+Shinano:Submarine
+Shōhō:Battle of the Coral Sea
+Sōryū:Battle of Midway
+Taihō:Battle of the Philippine Sea
+Unryū:Submarine
+Zuihō:Battle of Leyte Gulf
+
+

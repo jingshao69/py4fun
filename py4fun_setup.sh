@@ -1,7 +1,7 @@
 #!/bin/bash
 
 IFS=:
-PY4FUN_PY=imgresize.py:pdfextract.py:pdfmerge.py:picalc.py:prime.py:tk_loan.py:tk_saving.py:tk_tax.py:tk_tax2.py:tk_hash.py:check_cert.py:check_cipher.py:netscan.py:oui.map:stockq.py
+PY4FUN_PY=imgresize.py:pdfextract.py:pdfmerge.py:picalc.py:prime.py:tk_loan.py:tk_saving.py:tk_tax.py:tk_tax2.py:tk_hash.py:check_cert.py:check_cipher.py:netscan.py:oui.map
 
 CWD=$(pwd)
 pushd $HOME/bin

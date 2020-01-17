@@ -8,7 +8,7 @@ from tkinter import *
 
 
 # The title of the program
-PROG_TITLE="Rental Calculator"
+PROG_TITLE="Rental Return Calculator"
 
 # The name of the config file
 CONFIG_FILE=".tk_rental.ini"
@@ -16,8 +16,10 @@ CONFIG_FILE=".tk_rental.ini"
 # Help String
 PROG_HELP="Rental Calculator in Python"
 
+NUM_YEAR_DEPRECIATION=27.5
+
 #Fields
-fields = ('House Value', 'Mortgage Rate', 'Number of Payments', 'Down Payment', 'Property Tax','Home Owner Ins', 'Maintenance', 'Monthly Rent', 'Return Rate')
+fields = ('House Value', 'Mortgage Rate', 'Number of Payments', 'Tax Rate', 'Down Payment', 'Property Tax','Home Owner Ins',  'Maintenance', 'Monthly Rent', 'Return Rate')
 
 field_values = {}
 UI_Entries={}
@@ -30,6 +32,7 @@ def return_rate(*args):
     # principal loan:
     houseVal= locale.atof(UI_Entries['House Value'].get().strip(MONEY_SYM))
     downPayment = locale.atof(UI_Entries['Down Payment'].get().strip(MONEY_SYM))
+    taxRate= locale.atof(UI_Entries['Tax Rate'].get())
     loanValue = houseVal - downPayment
     #print("loanValue", loanValue)
 
@@ -51,10 +54,16 @@ def return_rate(*args):
         #print("Monthly", monthly)
         #print("Principal", principal)
         piti = monthly + (propTax + homeIns)/12
+        monthlyCost = piti - principal
         #print("piti", piti)
         if (monthlyRent > piti) and  (downPayment > 0):
-            grossProfit = (monthlyRent +principal - piti) *12 - maintenance; 
-            grossReturn = grossProfit / downPayment * 100.0;
+            grossProfit = (monthlyRent - monthlyCost) *12 - maintenance; 
+            depreciation = houseVal / NUM_YEAR_DEPRECIATION
+            taxLoss = depreciation - grossProfit
+            taxSaving = taxLoss * taxRate/100.0
+            #print("taxLoss", taxLoss)
+            #print("taxSaving", taxSaving)
+            grossReturn = (grossProfit  + taxSaving)/ downPayment * 100.0
             #print("Gross Return", grossReturn);
             UI_Entries['Return Rate'].delete(0,END)
             UI_Entries['Return Rate'].insert(0, "{0:.1f}%".format(grossReturn))

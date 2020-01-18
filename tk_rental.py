@@ -19,7 +19,7 @@ PROG_HELP="Rental Calculator in Python"
 NUM_YEAR_DEPRECIATION=27.5
 
 #Fields
-fields = ('House Value', 'Mortgage Rate', 'Number of Payments', 'Tax Rate', 'Down Payment', 'Property Tax','Home Owner Ins',  'Maintenance', 'Monthly Rent', 'Return Rate')
+fields = ('House Value', 'Mortgage Rate', 'Number of Payments', 'Tax Rate', 'Down Payment', 'Property Tax','Home Owner Ins',  'PITI','Principal','Maintenance', 'Monthly Rent', 'Gross Profit', 'Depreciation', 'Tax Loss', 'Return Rate')
 
 field_values = {}
 UI_Entries={}
@@ -51,15 +51,25 @@ def return_rate(*args):
         q = (1 + r)** n
         monthly = r * ( (q * loanValue ) / ( q - 1 ))
         principal = monthly - loanValue *r
+        UI_Entries['Principal'].delete(0,END)
+        UI_Entries['Principal'].insert(0, "{0:.1f}".format(principal))
         #print("Monthly", monthly)
         #print("Principal", principal)
         piti = monthly + (propTax + homeIns)/12
+        UI_Entries['PITI'].delete(0,END)
+        UI_Entries['PITI'].insert(0, "{0:.1f}".format(piti))
         monthlyCost = piti - principal
         #print("piti", piti)
         if (monthlyRent > piti) and  (downPayment > 0):
             grossProfit = (monthlyRent - monthlyCost) *12 - maintenance; 
+            UI_Entries['Gross Profit'].delete(0,END)
+            UI_Entries['Gross Profit'].insert(0, "{0:.1f}".format(grossProfit))
             depreciation = houseVal / NUM_YEAR_DEPRECIATION
+            UI_Entries['Depreciation'].delete(0,END)
+            UI_Entries['Depreciation'].insert(0, "{0:.1f}".format(depreciation))
             taxLoss = depreciation - grossProfit
+            UI_Entries['Tax Loss'].delete(0,END)
+            UI_Entries['Tax Loss'].insert(0, "{0:.1f}".format(taxLoss))
             taxSaving = taxLoss * taxRate/100.0
             #print("taxLoss", taxLoss)
             #print("taxSaving", taxSaving)

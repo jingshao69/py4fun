@@ -14,15 +14,17 @@ CONFIG_FILE=".ssh_list"
 PROG_HELP="SSH Launcher"
 
 targets=[]
+targetDescs=[]
 
 def loadTargets():
     fpath = os.path.join(os.environ['HOME'], CONFIG_FILE)
     with open(fpath, 'r') as f:
         for line in f:
-            target = line.strip()
+            fields = line.strip().split(':')
             #print(target)
-            if len(target) > 0:
-                targets.append(target)
+            if len(fields) == 2:
+                targets.append(fields[0])
+                targetDescs.append(fields[1])
 
 def quit_form(*args):
    root.quit()
@@ -38,15 +40,16 @@ if __name__ == '__main__':
     root = Tk()
     root.title(PROG_TITLE)
 
-    root.geometry('200x200')
+    root.geometry('250x200')
     loadTargets()
     numTargets=len(targets)
     #print(numTargets)
 
     #Create a 5x10 (rows x columns) grid of buttons inside the frame
     for i in range(numTargets):
-        btnText = targets[i]
-        btn = Button(root, text=btnText, command=lambda txt=btnText:launch_ssh(txt))
+        btnText = "%s (%s)" %(targets[i], targetDescs[i]) 
+        #print(btnText)
+        btn = Button(root, text=btnText, command=lambda txt=targets[i]:launch_ssh(txt))
         btn.pack()
 
     quitBtn = Button(root, text='Quit', command=quit_form)

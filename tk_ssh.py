@@ -40,8 +40,11 @@ if __name__ == '__main__':
     root = Tk()
     root.title(PROG_TITLE)
 
-    root.geometry('250x200')
     loadTargets()
+    height = len(targets) * 35
+    geomStr = '300x'+str(height)
+    
+    root.geometry(geomStr)
     numTargets=len(targets)
     #print(numTargets)
 

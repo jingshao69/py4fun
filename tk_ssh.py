@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+import platform
 import os.path
 from tkinter import *
 
@@ -30,9 +31,17 @@ def quit_form(*args):
    root.quit()
 
 def launch_ssh(target):
-    cmd = 'gnome-terminal -x sh -c "ssh -X ' + target + '"'
+    if is_ubuntu_18():
+        cmd = 'gnome-terminal -- ssh -X ' + target  
+    else:
+        cmd = 'gnome-terminal -x sh -c "ssh -X ' + target + '"'
     #print(cmd)
     os.system(cmd) 
+
+def is_ubuntu_18():
+    linux_distribution = platform.linux_distribution()
+    version = linux_distribution[1]
+    return "18" in version
 
 if __name__ == '__main__':
 
@@ -40,8 +49,12 @@ if __name__ == '__main__':
     root = Tk()
     root.title(PROG_TITLE)
 
-    root.geometry('250x200')
+
     loadTargets()
+    height = len(targets) * 35
+    geomStr = '300x'+str(height)
+    
+    root.geometry(geomStr)
     numTargets=len(targets)
     #print(numTargets)
 

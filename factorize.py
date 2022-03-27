@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import math
 import argparse
@@ -10,7 +10,7 @@ def find_factors(n):
         n_sqrt = int(math.sqrt(n)) + 1;
         #print "n: %d j: %d n_sqrt: %d " %(n, j, n_sqrt)
         find_factor = False
-        for i in xrange(j, n_sqrt):
+        for i in range(j, n_sqrt+1):
             if n % i == 0:
                 find_factor = True
                 if i in factors.keys():
@@ -40,14 +40,14 @@ args = parser.parse_args()
 
 factors = find_factors(args.number)
 
-print "%d = " %(args.number),
+print("%d = " %(args.number),end='')
 for key in sorted(factors):
    if factors[key] > 1:
-       print "(%d)^%d" %(key, factors[key]),
+       print("(%d)^%d" %(key, factors[key]),end='')
    else:
-       print "(%d)" %(key),
+       print("(%d)" %(key),end='')
 
 
-print ""
+print("")
 
 

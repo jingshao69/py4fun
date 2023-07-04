@@ -1,10 +1,11 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import locale
 import os.path
-import tkMessageBox
-from Tkinter import *
-import Tkinter, Tkconstants, tkFileDialog
+import tkinter.messagebox
+import tkinter.filedialog 
+from tkinter import *
+
 from glob import glob
 import myhash
 
@@ -26,7 +27,7 @@ class MyForm(Frame):
     root.quit()
 
   def load_file(self):
-    fname = tkFileDialog.askopenfilename(filetypes=[ ("All files", "*.*") ])
+    fname = tkinter.filedialog.askopenfilename(filetypes=[ ("All files", "*.*") ])
     if fname:
       self.title_file = fname 
       self.fileEntry.insert(0, fname)

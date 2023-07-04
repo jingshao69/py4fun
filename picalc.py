@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # This is a python code to calculate Pi using the Machin-like formula
 # Multiple threads are started to handle diffent parts of calulation
 
@@ -47,5 +47,5 @@ for t in threads:
   t.join()
 
 
-print pi
+print(pi)
 

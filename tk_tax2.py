@@ -1,11 +1,11 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import locale
 import os.path
 import argparse
 import configparser
-import tkMessageBox
-from Tkinter import *
+from tkinter import messagebox
+from tkinter import *
 
 
 # The title of the program
@@ -303,7 +303,7 @@ class MainWindow(Frame):
 
 
   def about(self, *args):
-    tkMessageBox.showinfo("About", PROG_HELP)
+    messagebox.showinfo("About", PROG_HELP)
 
 
   def quit_form(self, *args):

@@ -1,9 +1,9 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import math
 import os.path
-import tkMessageBox
-from Tkinter import *
+from tkinter import messagebox
+from tkinter import *
 
 
 # The title of the program
@@ -39,7 +39,7 @@ def calc_probability(*args):
    UI_Entries['Probability'].insert(0, prob_str )
 
 def about(*args):
-   tkMessageBox.showinfo("About", PROG_HELP)
+   messagebox.showinfo("About", PROG_HELP)
 
 def quit_form(*args):
    root.quit()

@@ -2,8 +2,9 @@
 
 import locale
 import os.path
-import tkinter.messagebox
-import tkinter.filedialog 
+from tkinter import messagebox
+from tkinter import filedialog
+#import tkinter.filedialog 
 from tkinter import *
 
 from glob import glob
@@ -21,13 +22,13 @@ class MyForm(Frame):
   HashValues={}
 
   def about(*args):
-    tkMessageBox.showinfo("About", PROG_HELP)
+    messagebox.showinfo("About", PROG_HELP)
 
   def quit_form(*args):
     root.quit()
 
   def load_file(self):
-    fname = tkinter.filedialog.askopenfilename(filetypes=[ ("All files", "*.*") ])
+    fname = filedialog.askopenfilename(filetypes=[ ("All files", "*.*") ])
     if fname:
       self.title_file = fname 
       self.fileEntry.insert(0, fname)

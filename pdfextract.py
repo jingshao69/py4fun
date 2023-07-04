@@ -1,4 +1,6 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
+
+# sudo pip install PyPDF2
 
 import PyPDF2, os
 import argparse
@@ -41,7 +43,7 @@ if  args.inFile.endswith('.pdf'):
       pageObj = pdfReader.getPage(pageNum)
       pdfWriter.addPage(pageObj)
 
-print "Writing output to %s..." %(args.outFile)
+print("Writing output to %s..." %(args.outFile))
 pdfOutput = open(args.outFile, 'wb')
 pdfWriter.write(pdfOutput)
 pdfOutput.close()

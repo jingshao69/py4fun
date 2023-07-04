@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import argparse
 
@@ -42,7 +42,7 @@ args = parser.parse_args()
 old_tax = get_fed_tax(int(args.old_taxable), 0)
 new_tax = get_fed_tax(int(args.new_taxable), 1)
 
-print "2017: %d 2018: %d Delta: %d" %(old_tax, new_tax, new_tax - old_tax)
+print("2017: %d 2018: %d Delta: %d" %(old_tax, new_tax, new_tax - old_tax))
 
 
 

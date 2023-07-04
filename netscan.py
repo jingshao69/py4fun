@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import time
 import multiprocessing
@@ -29,7 +29,7 @@ def get_ouimap_file():
 
     bin_oui_map = os.environ['HOME'] + '/bin/' + OUI_MAP
     if os.path.exists(bin_oui_map):
-	return bin_oui_map
+        return bin_oui_map
     return ''
 
 def pinger( job_q, results_q ):
@@ -50,21 +50,21 @@ def init_oui_map():
     oui_mapfile = get_ouimap_file()
     with open(oui_mapfile, "r") as ins:
         for line in ins:
-	    fields = line.split(":")
-	    mac = fields[0].strip()
+            fields = line.split(":")
+            mac = fields[0].strip()
             company = fields[1].strip()
             oui_map[mac]=company
     ins.close()
 
 def get_company(oui):
-    if oui_map.has_key(oui):
+    if oui in oui_map:
         return oui_map[oui]
     else:
         return ""
 
 def get_oui(mac):
     new_oui=[]
-    oui=mac[:8].replace(":","")
+    oui=mac[:8].replace(":","").encode('utf-8')
     ouiArray =  bytearray(oui)
     for i in range(len(ouiArray)):
         if ((ouiArray[i] >= ord('a')) and (ouiArray[i] <= ord('f'))):
@@ -76,11 +76,10 @@ def get_mac():
     global mac_map
     with open("/proc/net/arp", "r") as ins:
         for line in ins:
-	    fields = line.split()
- 
+            fields = line.split()
             if len(fields) == 6:
-	        ip=fields[0]
-		if (fields[3] != "00:00:00:00:00:00"):
+                ip=fields[0]
+                if (fields[3] != "00:00:00:00:00:00"):
                     mac_map[ip] = fields[3]
     ins.close()
 
@@ -92,13 +91,14 @@ def get_my_ip():
 
 def get_my_mac(ifname):
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    info = fcntl.ioctl(s.fileno(), 0x8927,  struct.pack('256s', str(ifname[:15])))
-    return ':'.join(['%02x' % ord(char) for char in info[18:24]])
+    #info = fcntl.ioctl(s.fileno(), 0x8927,  struct.pack('256s', str(ifname[:15])))
+    #return ':'.join(['%02x' % ord(char) for char in info[18:24]])
+    return ""
 
 def init_my_ip():
     my_intf, my_ip=get_my_ip()
     my_mac_addr = get_my_mac(my_intf)
-    print "Adding my own %s ==> %s to the Map" %(my_ip, my_mac_addr)
+    print("Adding my own %s ==> %s to the Map" %(my_ip, my_mac_addr))
     mac_map[my_ip]=my_mac_addr
 
 def do_ping(subnet):
@@ -142,17 +142,17 @@ def load_know_hosts():
                   known_hosts[mac] = desc
 
 def print_desc(ip):
-    if mac_map.has_key(ip):
+    if ip in mac_map:
         mac = mac_map[ip]
-        if known_hosts.has_key(mac):
-            print "%s ====> %s (%s)" %(ip, mac, known_hosts[mac])
+        if mac in known_hosts:
+            print("%s ====> %s (%s)" %(ip, mac, known_hosts[mac]))
         else:
             oui = get_oui(mac)
             company = get_company(oui)
-            print "%s ==> %s (%s)" %(ip, mac, company)
+            print("%s ==> %s (%s)" %(ip, mac, company))
 
     else:
-        print "%s not found in ARP table!" %(ip)
+        print("%s not found in ARP table!" %(ip))
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--net', '-n', default=DEFAULT_NET, help="Subnet")
@@ -164,36 +164,36 @@ net_parts=args.net.split(".")
 subnet=".".join(net_parts[:3])
 
 if not os.path.exists("/proc/net/arp"):
-    print "No /proc/net/arp found! Not a true Linux system!"
+    print("No /proc/net/arp found! Not a true Linux system!")
     sys.exit()
 
 #Find my own IP/MAC and add to the map
 init_my_ip()
 
-print "[Scanning network %s.0...]" %(subnet)
+print("[Scanning network %s.0...]" %(subnet))
 
 do_ping(subnet)
 
-print "[Scanning Complete]"
+print("[Scanning Complete]")
 
-print "[Reading OUI Map...]"
+print("[Reading OUI Map...]")
 init_oui_map()
 
 time.sleep(1)
 load_know_hosts()
 
-print "[Reading ARP Table...]"
+print("[Reading ARP Table...]")
 get_mac()
 arp_ip_list=mac_map.keys()
 
 ip_list.sort()
-print "[Hosts responding to ping...]"
+print("[Hosts responding to ping...]")
 for ip in ip_list:
     ip_str = str(ip)
     print_desc(ip_str)
 
-print ""
-print "[Hosts not responding to ping but is in ARP table...]"
+print("")
+print("[Hosts not responding to ping but is in ARP table...]")
 for ip in arp_ip_list:
     nip = netaddr.IPAddress(ip)
     if (nip not in ip_list):

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import argparse
 
@@ -16,5 +16,5 @@ mac_str = args.macAddr.replace(":", "").lower()
 
 engine_str = pen_str + "03" + mac_str + "00"
 
-print "%s" %(engine_str)
+print("%s" %(engine_str))
 

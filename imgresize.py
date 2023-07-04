@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 from glob import glob
 from PIL import Image
@@ -7,7 +7,7 @@ import os
 import sys
 
 def resize_file(img_file, hsize):
-  print "Resizing %s..." %(img_file)
+  print("Resizing %s..." %(img_file))
   img = Image.open(img_file)
   width, height = img.size
   # print "width %d height %d" %(width, height)

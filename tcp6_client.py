@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import socket
 import sys
@@ -19,25 +19,27 @@ for res in socket.getaddrinfo(HOST, PORT, socket.AF_UNSPEC, socket.SOCK_STREAM):
     #print res
     af, socktype, proto, canonname, sa = res
     try:
-	s = socket.socket(af, socktype, proto)
-    except socket.error, msg:
-	s = None
-	continue
+        s = socket.socket(af, socktype, proto)
+    except socket.error as err:
+        s = None
+        continue
+
     try:
-	s.connect(sa)
-    except socket.error, msg:
-	s.close()
-	s = None
-	continue
+        s.connect(sa)
+    except socket.error as err:
+        s.close()
+        s = None
+        continue
+
     break
 
 if s is None:
-    print 'could not open socket'
+    print('could not open socket')
     sys.exit(1)
 
 Messages=["Hello World!", "Peace on Earth!", "Love Each Other!"]
 for m in Messages:
-    print 'Sent: %s' %(m)
-    s.send(m)
+    print('Sent: %s' %(m))
+    s.send(m.encode('utf-8'))
     data = s.recv(1024)
-    print 'Received %s' %(str(data))
+    print('Received: %s' %(data.decode('utf-8')))

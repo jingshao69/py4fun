@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import socket
 import sys
@@ -17,7 +17,7 @@ def bindServerPort(port):
             # Disable IPV6_ONLY on AF_INET6
             if af == socket.AF_INET6:
                 sock.setsockopt(socket.IPPROTO_IPV6, socket.IPV6_V6ONLY, 0)
-            print "%d bind!" %(port)
+            print("%d bind!" %(port))
             sock.bind(sa)
            
             return sock
@@ -36,11 +36,11 @@ if __name__ == "__main__":
     sock.listen(1)
     while True:
         conn, addr = sock.accept()
-        print 'Connected by', addr
+        print('Connected by', addr)
         while True:
             data = conn.recv(1024)
             if len(data) > 0:
-                print "Recvd: %s" %(str(data))
+                print("Recvd: %s" %(data.decode('utf-8')))
             if not data: 
                 break
             conn.send(data)

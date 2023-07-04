@@ -1,6 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import math
+# sudo pip install plotly
 import plotly
 import plotly.graph_objs as go
 

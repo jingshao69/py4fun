@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import os
 import binascii
@@ -18,6 +18,6 @@ for i in range(0, len(rnd)):
   hex_code = binascii.b2a_hex(rnd[i])
   hex_array.append(hex_code)
 
-print args.delimiter.join(hex_array)
+print(args.delimiter.join(hex_array))
 
 

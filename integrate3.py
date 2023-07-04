@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import sys
 from sympy import *
@@ -11,7 +11,7 @@ x = Symbol('x')
 
 def find_zero(F):
     result=solve(F)
-    #print "%r: %r" %(F, result)
+    #print("%r: %r" %(F, result))
     return result
 
 def area(F, r0, r1):
@@ -49,7 +49,7 @@ def find_sub_area(F, isF1, xranges):
 
     F_zeros=find_zero(F)
     
-    print "Function: %r zeros: %r\n" %(F, F_zeros)
+    print("Function: %r zeros: %r\n" %(F, F_zeros))
     
     last_x = min_x
 
@@ -66,7 +66,7 @@ def find_sub_area(F, isF1, xranges):
             #print F_Func(check_x)
 
             last_x = x
-            print "[%r - %r]: %r %r" %(last_x, x, a, factor)
+            print("[%r - %r]: %r %r" %(last_x, x, a, factor))
 
     
     a = area(F, last_x, max_x)
@@ -74,27 +74,27 @@ def find_sub_area(F, isF1, xranges):
     factor = get_factor(check_x, isF1)
 
     total_area += a*factor
-    print "[%r - %r]: %r %r\n" %(last_x, max_x, a, factor)
+    print("[%r - %r]: %r %r\n" %(last_x, max_x, a, factor))
    
 
-function = raw_input("Enter your first function: ")
+function = input("Enter your first function: ")
 
 F1 = parse_expr(function, evaluate=False)
 Function_F1=lambdify(x, F1)
 
-function = raw_input("Enter your second function: ")
+function = input("Enter your second function: ")
 
 F2 = parse_expr(function, evaluate=False)
 Function_F2=lambdify(x, F2)
 
-print ""
+print("")
 xranges= find_zero(F1-F2)
-print "\nRange: [%r - %r]\n" %(xranges[0], xranges[1])
+print("\nRange: [%r - %r]\n" %(xranges[0], xranges[1]))
 
 find_sub_area(F1, True, xranges)
 
 find_sub_area(F2, False, xranges)
 
-print "Total Area: %r" %(total_area)
+print("Total Area: %r" %(total_area))
 
          

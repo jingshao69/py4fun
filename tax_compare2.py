@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import argparse
 
@@ -49,7 +49,7 @@ while income <= max_income:
     old_tax = get_fed_tax(old_taxable, 0) - 1000 * args.num_kids_under_17 
     new_tax = get_fed_tax(new_taxable, 1) - 2000*args.num_kids_under_17 - 500 *args.num_kids_over_17
 
-    print "2017: %d/%d 2018: %d/%d Delta: %d" %(old_tax, old_taxable, new_tax, new_taxable,new_tax - old_tax)
+    print("2017: %d/%d 2018: %d/%d Delta: %d" %(old_tax, old_taxable, new_tax, new_taxable,new_tax - old_tax))
     income = income + 1000
 
 

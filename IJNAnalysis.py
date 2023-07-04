@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import io
 
@@ -20,13 +20,13 @@ with io.open("IJNCarrier.txt", "r", encoding='utf8') as f:
 
 for battle in battle_dict.keys():
     if battle != "Scrapped":
-        print "%s:\t%d" %(battle, len(battle_dict[battle]))
+        print("%s:\t%d" %(battle, len(battle_dict[battle])))
         ship_cnt += len(battle_dict[battle])
         for s in battle_dict[battle]:
-            print "\t%s" %(s),
-        print ""
+            print("\t%s" %(s),end='')
+        print("")
 
-print "\nTotal:\t%d" %(ship_cnt)
+print("\nTotal:\t%d" %(ship_cnt))
 
 
         

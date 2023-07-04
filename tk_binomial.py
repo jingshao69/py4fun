@@ -1,9 +1,9 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import math
 import os.path
-import tkMessageBox
-from Tkinter import *
+from tkinter import messagebox
+from tkinter import *
 
 
 # The title of the program
@@ -25,7 +25,7 @@ def factorial(n):
     return result
 
 def binomial(n, k):
-    return math.factorial(n) / (math.factorial(n-k) * math.factorial(k))
+    return int(math.factorial(n) / (math.factorial(n-k) * math.factorial(k)))
 
 def calc_binomial(*args):
    # period rate:
@@ -37,7 +37,7 @@ def calc_binomial(*args):
        UI_Entries['Coeff'].insert(0, str(coeff))
 
 def about(*args):
-   tkMessageBox.showinfo("About", PROG_HELP)
+   messagebox.showinfo("About", PROG_HELP)
 
 def quit_form(*args):
    root.quit()

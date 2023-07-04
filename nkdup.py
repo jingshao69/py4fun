@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import math
 import argparse
@@ -26,9 +26,9 @@ nn=int(args.n)
 kk=int(args.k)
 
 if (kk > nn):
-    print "1.000"
+    print("1.000")
 else:
-    print "%.3f" %(prob_dup_nk(nn,kk))
+    print("%.3f" %(prob_dup_nk(nn,kk)))
 
 
 

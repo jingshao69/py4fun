@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import math
 import argparse
@@ -22,7 +22,7 @@ args = parser.parse_args()
 nn=int(args.n)
 kk=int(args.k)
 
-print "%d" %(combo_n2k(nn,kk))
+print("%d" %(combo_n2k(nn,kk)))
 
 
 

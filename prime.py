@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 
 import math
@@ -22,12 +22,13 @@ def print_prime():
   cnt=0
   for prime in prime_array:
     if (cnt % PRIME_PER_LINE) == 0:
-      print "%d" %(prime),
+      print("%d" %(prime), end='')
     elif (cnt % PRIME_PER_LINE) == (PRIME_PER_LINE -1):
-      print "\t%d\n" %(prime),
+      print("\t%d\n" %(prime), end='')
     else:
-      print "\t%d" %(prime),
+      print("\t%d" %(prime), end='')
     cnt = cnt + 1
+  print('')
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--max", "-m", type=int, default=10000)
@@ -36,7 +37,7 @@ args = parser.parse_args()
 
 PRIME_PER_LINE= args.col
 
-for i in range(1, args.max/10):
+for i in range(1, int(args.max/10)):
   for suffix in prime_suffix:
     num = i*10 + suffix
     if is_prime(num):

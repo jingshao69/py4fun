@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 from sympy import *
 from sympy.parsing.sympy_parser import parse_expr

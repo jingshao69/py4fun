@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import math
 import argparse
@@ -24,5 +24,5 @@ kk=int(args.k)
 pp=float(args.p)
 
 
-print "%.3f" %(binomial(nn, kk) *math.pow(pp,kk)*math.pow(1-pp, nn-kk))
+print("%.3f" %(binomial(nn, kk) *math.pow(pp,kk)*math.pow(1-pp, nn-kk)))
 

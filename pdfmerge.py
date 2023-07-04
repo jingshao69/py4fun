@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 from glob import glob
 import PyPDF2, os
@@ -28,7 +28,7 @@ for pdfFile in args.inFile:
     for file in file_list:
       add_file(file)
 
-print "Writing output to %s..." %(args.outfile)
+print("Writing output to %s..." %(args.outfile))
 pdfOutput = open(args.outfile, 'wb')
 pdfWriter.write(pdfOutput)
 pdfOutput.close()

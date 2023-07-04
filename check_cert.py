@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import sys
 import argparse
@@ -37,16 +37,15 @@ def check_cert(ip_addr):
                 value = line[index+len(token)+1:].replace("(","").replace(")","").lstrip().rstrip();
 
                 if token == "Subject":
-	            index2 = line.find("C=")
-	            if index2 >= 0:
+                  index2 = line.find("C=")
+                  if index2 >= 0:
                         cert_data[token] = value
                         print("%s = %s" %(token, value))
                 elif token == "Signature Algorithm":
-	            if algo_cnt == 0:
+                  if algo_cnt == 0:
                         cert_data[token] = value
                         print("%s = %s" %(token, value))
-	                algo_cnt = 1
-
+                        algo_cnt = 1
                 else:
                     cert_data[token] = value
                     print("%s = %s" %(token, value))

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 from scipy import stats
 import argparse
@@ -20,8 +20,8 @@ with open(args.data_file, 'r') as f:
 
    if len(x) != 0:
        slope, intercept, r_value, p_value, std_err = stats.linregress(x,y)
-       print " y = %.2f *x + %.2f" %(slope, intercept)
-       print " r = %.2f p = %.2f stderr = %.2f" %(r_value, p_value, std_err)
+       print(" y = %.2f *x + %.2f" %(slope, intercept))
+       print(" r = %.2f p = %.2f stderr = %.2f" %(r_value, p_value, std_err))
 
        
 

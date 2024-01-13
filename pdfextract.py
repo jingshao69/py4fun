@@ -24,7 +24,7 @@ def check_range(page):
 
 
 #Create the PdfFileWriter object
-pdfWriter = PyPDF2.PdfFileWriter()
+pdfWriter = PyPDF2.PdfWriter()
 
 parser = argparse.ArgumentParser()
 parser.add_argument('outFile')
@@ -37,11 +37,11 @@ page_ranges =args.range.split(',')
 
 if  args.inFile.endswith('.pdf'):
   pdfFileObj = open(args.inFile, 'rb')
-  pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
-  for pageNum in range(0, pdfReader.numPages):
+  pdfReader = PyPDF2.PdfReader(pdfFileObj)
+  for pageNum in range(0, len(pdfReader.pages)):
     if check_range(pageNum+1):
-      pageObj = pdfReader.getPage(pageNum)
-      pdfWriter.addPage(pageObj)
+      pageObj = pdfReader.pages[pageNum]
+      pdfWriter.add_page(pageObj)
 
 print("Writing output to %s..." %(args.outFile))
 pdfOutput = open(args.outFile, 'wb')

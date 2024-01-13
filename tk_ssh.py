@@ -2,6 +2,7 @@
 
 import platform
 import os.path
+import distro
 from tkinter import *
 
 
@@ -31,17 +32,15 @@ def quit_form(*args):
    root.quit()
 
 def launch_ssh(target):
-    if is_ubuntu_18():
-        cmd = 'gnome-terminal -- ssh -X ' + target  
-    else:
+    if is_ubuntu_16():
         cmd = 'gnome-terminal -x sh -c "ssh -X ' + target + '"'
+    else:
+        cmd = 'gnome-terminal -- ssh -X ' + target  
     #print(cmd)
     os.system(cmd) 
 
-def is_ubuntu_18():
-    linux_distribution = platform.linux_distribution()
-    version = linux_distribution[1]
-    return "18" in version
+def is_ubuntu_16():
+    return "16" in distro.version()
 
 if __name__ == '__main__':
 

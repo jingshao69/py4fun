@@ -6,15 +6,15 @@ import argparse
 import sys
 
 def add_file(pdf_file):
-  print "Adding %s..." %(pdf_file)
+  print("Adding %s..." %(pdf_file))
   pdfFileObj = open(pdf_file, 'rb')
-  pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
-  for pageNum in range(0, pdfReader.numPages):
-    pageObj = pdfReader.getPage(pageNum)
-    pdfWriter.addPage(pageObj)
+  pdfReader = PyPDF2.PdfReader(pdfFileObj)
+  for pageNum in range(0, len(pdfReader.pages)):
+    pageObj = pdfReader.pages[pageNum]
+    pdfWriter.add_page(pageObj)
 
 #Create the PdfFileWriter object
-pdfWriter = PyPDF2.PdfFileWriter()
+pdfWriter = PyPDF2.PdfWriter()
 
 parser = argparse.ArgumentParser()
 parser.add_argument('outfile')
